@@ -10,8 +10,8 @@ sys.path.append('C:/Users/micha/OneDrive/Documents/JupyterProjects/personal/imap
 from utils import utils
 
 def resize_img(content_img, style_img):
-  content_img = cv2.resize(cv2.imread(content_img), (256, 256))
-  style_img = cv2.resize(cv2.imread(style_img), (256, 256))
+  content_img = cv2.resize(cv2.imread(content_img), (512, 512))
+  style_img = cv2.resize(cv2.imread(style_img), (512, 512))
   return content_img, style_img
 
 def image_to_tensor(content_img, style_img):
@@ -37,6 +37,7 @@ def finalize(content_img):
     assert content_img.shape[0] == 1
     content_img = content_img[0]
   content_img = Image.fromarray(content_img)
+  
   return content_img
 
 def encode_img(content_img):

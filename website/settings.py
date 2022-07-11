@@ -60,7 +60,10 @@ INSTALLED_APPS = [
     # style
     'tailwind',
     'theme',
-    'django_browser_reload'
+    'django_browser_reload',
+
+    # plugins
+    'django_feather',
 ]
 
 MIDDLEWARE = [

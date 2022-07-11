@@ -4,7 +4,7 @@
 
 @layer components {
   label {
-    @apply py-4 bg-sky-700 text-white cursor-pointer block mt-4 text-center rounded-md font-semibold;
+    @apply py-3 bg-sky-700 text-white cursor-pointer block mt-4 text-center rounded-md font-semibold;
   }
 
   input {

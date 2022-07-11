@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from index.models import Content, Style
+from .models import Result
 from .artist import *
 
 import time
@@ -24,7 +25,7 @@ class IndexView(generic.TemplateView):
     context = {'content_img': content_img}
     return render(request, self.template_name, context=context)
 
-def preprocess_and_train(content_img, style_img, epochs=300, optimizer=tf.keras.optimizers.Adam(learning_rate=0.01, beta_1=0.99, epsilon=1e-1)):
+def preprocess_and_train(content_img, style_img, epochs=300, optimizer=tf.keras.optimizers.Adam(learning_rate=0.02, beta_1=0.99, epsilon=1e-1)):
   content_img, style_img = resize_img(content_img, style_img)
   content_img, style_img = image_to_tensor(content_img, style_img)
   model, (content_target, style_target) = get_target(content_img, style_img)
@@ -33,5 +34,8 @@ def preprocess_and_train(content_img, style_img, epochs=300, optimizer=tf.keras.
   for epoch in range(epochs):
     utils.train_step(content_img, epoch, style_target, content_target, optimizer, model, start)
   end = time.time()
-  print(f'Time taken for {epochs} epochs = {round(end - start, 2)} s')
+  time_taken = round(end - start, 2)
+  print(f'Time taken for {epochs} epochs = {time_taken} s')
+  result = Result(time_taken=time_taken)
+  result.save()
   return content_img

@@ -4,9 +4,23 @@
   const content = document.getElementById('content');
   const style = document.getElementById('style');
   const placeholders = document.querySelectorAll('.placeholder');
+  const labels = document.querySelectorAll('label');
+  const btn = document.querySelector('button');
+  const form = document.querySelector('form');
+  const mainForm = document.querySelector('.main-form');
+  const loadingScreen = document.querySelector('.loading-screen');
+
+  labels[0].innerHTML = 'Upload content image';
+  labels[1].innerHTML = 'Upload style image';
 
   content.addEventListener('change', previewContent, false);
   style.addEventListener('change', previewStyle, false);
+  btn.addEventListener('click', function() {
+    mainForm.classList.add('hidden');
+    btn.classList.add('hidden');
+    loadingScreen.classList.remove('hidden');
+    form.submit();
+  });
 
   function previewContent(e) {
     if (window.FileReader) {
